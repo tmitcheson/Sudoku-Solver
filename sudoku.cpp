@@ -143,3 +143,27 @@ void update_board(const char position[3], int digit, char board[9][9]){
   
 }
 
+
+// Question 3, function for outputting board into another file.
+bool save_board(const char* filename, const char board[9][9]){
+  
+  ofstream out(filename);
+  
+  if(out.fail())
+    return false;
+  
+  for(int row = 0; row < 9; row++){
+    for(int col = 0; col < 9; col++){
+      out.put(board[row][col]);
+    }
+    if(row == 8)
+      break;
+    out.put('\n');
+  }
+
+  out.close();
+
+  return true;
+
+}
+
