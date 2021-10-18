@@ -72,3 +72,74 @@ void display_board(const char board[9][9]) {
 }
 
 /* add your functions here */
+
+
+// Question 1, checks each space has a valid value between 1-9
+bool is_complete(const char board[9][9]){
+  for(int row = 0; row < 9; row++){
+    for(int col = 0; col < 9; col++){
+      if(!((board[row][col] > '0') && (board[row][col] <= '9')))
+        return false;
+      else return true;
+    }
+  }
+  return true;
+}
+
+// Question 2, series of functions testing for validity, before updating board and returning true if it passes all tests
+
+bool make_move(const char position[3], int digit, char board[9][9]){
+  // valid position check (for range)
+  if (!(check_input(position)))
+    return false;
+  
+  // valid position check (for sudoku logic)
+  if (!(check_logic(position, digit, board)))
+    return false;
+
+  // update board if it passes both tests
+  update_board(position, digit, board);
+  return true;
+} 
+
+
+// helper function for Q2, function for checking range validity of 'position'. Returns true if valid, and false otherwise.
+bool check_input(const char input[3]){
+  if(input[0] < 'A' || input[0] > 'I')
+    return false;
+  if(input[1] < '1' || input[1] > '9')
+    return false;
+  else return true;
+}
+
+// helper function for Q2, function for checking whether digit is already in specified row/column. Returns true if not, and false if it is.
+bool check_logic(const char position[3], int digit, const char board[9][9]){
+
+  int row_pos = (static_cast<int>(position[0])) - 65;
+  
+  for(int col = 0; col < 9; col++){
+    if(board[row_pos][col] == digit)
+      return false;
+  }
+
+  int col_pos = (static_cast<int>(position[1])) - 49;
+
+  for(int row = 0; row < 9; row++){
+    if(board[row][col_pos] == digit)
+      return false;
+  }
+
+  return true;
+}
+
+// helper function for updating board once fail checks have been passed
+void update_board(const char position[3], int digit, char board[9][9]){
+
+  int row_pos = (static_cast<int>(position[0])) - 65;
+  int col_pos = (static_cast<int>(position[1])) - 49;
+
+  board[row_pos][col_pos] = digit;
+  
+  
+}
+

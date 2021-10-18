@@ -47,9 +47,44 @@ int main() {
   cout << "a valid move. The board is:\n";
   display_board(board);
 
-  // write more tests
+  // Test already filled space
+  cout << "Putting '2' into B1 is ";
+  if (!make_move("B1", '2', board)) {
+    cout << "NOT ";
+  }
+  cout << "a valid move. The board is:\n";
+  display_board(board);
 
-  cout << "=================== Question 3 ===================\n\n";
+  // Test illegal sudoku logic
+  cout << "Putting '9' into G6 is ";
+  if (!make_move("G6", '9', board)) {
+    cout << "NOT ";
+  }
+  cout << "a valid move. The board is:\n";
+  display_board(board);
+
+  // Test out of range input
+  cout << "Putting '5' into X0 is ";
+  if (!make_move("X0", '5', board)) {
+    cout << "NOT ";
+  }
+  cout << "a valid move. The board is:\n";
+  display_board(board);
+
+  // Should be OK
+  cout << "Putting '9' into F9 is ";
+  if (!make_move("F9", '9', board)) {
+    cout << "NOT ";
+  }
+  cout << "a valid move. The board is:\n";
+  display_board(board);
+
+
+
+
+
+
+  /* cout << "=================== Question 3 ===================\n\n";
 
   load_board("easy.dat", board);
   if (save_board("easy-copy.dat", board)) {
@@ -84,6 +119,8 @@ int main() {
   cout << "=================== Question 5 ===================\n\n";
 
   // write more tests
+
+  */
 
   return 0;
 }
