@@ -46,8 +46,17 @@ int main() {
   }
   cout << "a valid move. The board is:\n";
   display_board(board);
-  /*
-  // Test already filled space
+
+  //Test: already placed in that mini grid
+  cout << "Putting '9' into E5 is ";
+  if (!make_move("E5", '9', board)) {
+    cout << "NOT ";
+  }
+  cout << "a valid move. The board is:\n";
+  display_board(board);
+  
+
+  // Test: already filled space
   cout << "Putting '2' into B1 is ";
   if (!make_move("B1", '2', board)) {
     cout << "NOT ";
@@ -55,7 +64,7 @@ int main() {
   cout << "a valid move. The board is:\n";
   display_board(board);
 
-  // Test illegal sudoku logic
+  // Test: illegal sudoku logic
   cout << "Putting '9' into G6 is ";
   if (!make_move("G6", '9', board)) {
     cout << "NOT ";
@@ -63,7 +72,7 @@ int main() {
   cout << "a valid move. The board is:\n";
   display_board(board);
 
-  // Test out of range input
+  // Test: out of range input
   cout << "Putting '5' into X0 is ";
   if (!make_move("X0", '5', board)) {
     cout << "NOT ";
@@ -78,7 +87,7 @@ int main() {
   }
   cout << "a valid move. The board is:\n";
   display_board(board);
-  */
+
 
   cout << "=================== Question 3 ===================\n\n";
 
@@ -90,7 +99,7 @@ int main() {
   }
   cout << '\n';
 
-/*
+
   cout << "=================== Question 4 ===================\n\n";
 
   load_board("easy.dat", board);
@@ -111,13 +120,91 @@ int main() {
   }
   cout << '\n';
 
-  // write more tests
+  
+  load_board("mystery1.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery1' board has a solution:\n";
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
 
+
+  load_board("mystery2.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery2' board has a solution:\n";
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
+
+  
+  load_board("mystery3.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery3' board has a solution:\n";
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
+
+
+  
   cout << "=================== Question 5 ===================\n\n";
 
-  // write more tests
+  /*  load_board("easy.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'easy' board has a solution:\n";
+    display_board(board);
+    cout << "Recursive count = " << count << endl;
+   } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
+
+  load_board("medium.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'medium' board has a solution:\n";
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
+
+  
+  load_board("mystery1.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery1' board has a solution:\n";
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
+
+
+  load_board("mystery2.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery2' board has a solution:\n";
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
+
+  
+  load_board("mystery3.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery3' board has a solution:\n";
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found.\n";
+  }
+  cout << '\n';
 
   */
+
 
   return 0;
 }

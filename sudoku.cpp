@@ -78,9 +78,8 @@ void display_board(const char board[9][9]) {
 bool is_complete(const char board[9][9]){
   for(int row = 0; row < 9; row++){
     for(int col = 0; col < 9; col++){
-      if(!((board[row][col] > '0') && (board[row][col] <= '9')))
-        return false;
-      else return true;
+      if(board[row][col] == '.')
+	return false;
     }
   }
   return true;
@@ -90,12 +89,14 @@ bool is_complete(const char board[9][9]){
 
 bool make_move(const char position[3], int digit, char board[9][9]){
   // valid position check (for range)
-  if (!(check_input(position)))
+  if (!(check_input(position))){
     return false;
+  }
   
   // valid position check (for sudoku logic)
-  if (!(check_logic(position, digit, board)))
+  if (!(check_logic(position, digit, board))){
     return false;
+  }
 
   // update board if it passes both tests
   update_board(position, digit, board);
@@ -115,30 +116,54 @@ bool check_input(const char input[3]){
 // helper function for Q2, function for checking whether digit is already in specified row/column. Returns true if not, and false if it is.
 bool check_logic(const char position[3], int digit, const char board[9][9]){
 
+  // check number not already in row
   int row_pos = (static_cast<int>(position[0])) - 65;
-  
   for(int col = 0; col < 9; col++){
     if(board[row_pos][col] == digit)
       return false;
   }
 
+  // check number not already in col
   int col_pos = (static_cast<int>(position[1])) - 49;
-
   for(int row = 0; row < 9; row++){
     if(board[row][col_pos] == digit)
       return false;
   }
 
+  // check number not already in grid  
+  int row_grid = (row_pos / 3) * 3;
+  int col_grid = (col_pos / 3) * 3;
+  if(!(mini_grid_check(digit, board, row_grid, col_grid)))
+    return false;
+  
   return true;
+  
 }
 
-// helper function for updating board once fail checks have been passed
+
+
+// helper function for mini grid checking
+bool mini_grid_check(int digit, const char board[9][9], int grid_row, int grid_col){
+  int row_max = grid_row + 3;
+  int col_max = grid_col + 3;
+  for(int i = grid_row; i < row_max; i++){
+    for(int j = grid_col; j < col_max; j++){
+      if(board[i][j] == digit){
+	return false;
+      }
+    }
+  }
+  return true;
+}
+  
+
+// helper function for Q2, updating board once fail checks have been passed
 void update_board(const char position[3], int digit, char board[9][9]){
 
   int row_pos = (static_cast<int>(position[0])) - 65;
   int col_pos = (static_cast<int>(position[1])) - 49;
 
-  board[row_pos][col_pos] = digit;
+  board[row_pos][col_pos] = static_cast<char>(digit);
   
   
 }
@@ -166,4 +191,46 @@ bool save_board(const char* filename, const char board[9][9]){
   return true;
 
 }
-
+/* Question 4, function for solving the whole bloody ting */
+bool solve_board(char board[9][9]){
+  // stopping case
+  if(is_complete(board))
+    return true;
+  
+  // find an empty square
+  char row, col;
+  empty_square(row, col, board);
+  char position[3];
+  position[0] = row;
+  position[1] = col;
+  
+  // run through possible values for empty square
+  int row_int = static_cast<int>(row) - 65;
+  int col_int = static_cast<int>(col) - 49;
+  for(char digit = '1'; digit <= '9'; digit++){
+    if(make_move(position, digit, board)){
+      if(solve_board(board))
+        return true;
+      board[row_int][col_int] = '.';
+    }
+   }
+   return false;
+  
+}
+  
+// helper function for Q4, check where the next empty space is
+void empty_square(char &row, char &col, const char board[9][9]){
+  row = 'A';
+  col = '1';
+  int row_int = static_cast<int>(row) - 65;
+  int col_int = static_cast<int>(col) - 49;
+  for(row_int = 0; row_int < 9; row_int++){
+    for(col_int = 0; col_int < 9; col_int++){
+      if (board[row_int][col_int] == '.'){
+        row = static_cast<char>(row_int) + 65;
+        col = static_cast<char>(col_int) + 49;
+        return;
+      }
+    }
+  }
+}
