@@ -139,6 +139,8 @@ int main() {
     display_board(board);
   } else {
     cout << "A solution cannot be found.\n";
+    // to prove a failure leads to the original board as specified in Q4
+    display_board(board);
   }
   cout << '\n';
 
@@ -171,6 +173,7 @@ int main() {
     display_board(board);
   } else {
     cout << "A solution cannot be found.\n";
+    display_board(board);
   }
   cout << '\n';
 

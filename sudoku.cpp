@@ -171,12 +171,11 @@ bool save_board(const char* filename, const char board[9][9]){
     if(row == 8) break;
     out.put('\n');
   }
-
   out.close();
-
   return true;
-
 }
+
+
 /* Question 4, recursive function for solving the board */
 bool solve_board(char board[9][9]){
   // stopping case
