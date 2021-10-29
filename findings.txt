@@ -1,1 +1,30 @@
-Summarise your findings here (see specification).
+After question 4 ruled out mystery board 2 as the 'impossible' board,
+I used two techniques to determine which of board 1 and board 3 were
+'hard' and 'extremely hard'. 
+
+Firstly I timed the respective function calls. Due to inconsistent results
+I meaned 10 separate executions. Mystery board 1 had a mean of 144743 
+microseconds for each call (SD = 854.762) compared to mystery board 3 
+posting 4910.7 microseconds for each call (SD = 118.095).
+Due to the relatively small nature of the SDs and the huge gap between the
+two timings, it is safe to conclude mystery board 1 was the 'extremely hard'
+board and mystery 3 was 'hard'.
+
+To compound these findings, I added a counter to an overloaded solve_board 
+function to count the number of recursions taken to solve each board. Mystery 
+board 1 involved 421546 recursions compared to mystery 3's 5173 recursions, 
+showing the same result as previous.
+
+'Difficult' is a relative term contingent on the method of solving used. Humans
+may find certain boards easier/more difficult than this algorithm - this
+could be due to a more thoughtful and diligent approach instead of the
+workhorse trial and error approach employed here. For this reason the approaches
+used to measure difficulty may not be appropriate for every sudoku board comparison,
+but in this case it is safe to say Mystery Board 1 was 'extremely difficult'
+and Mystery Board 3 was 'difficult'.
+
+
+
+
+
+

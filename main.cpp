@@ -1,8 +1,10 @@
 #include <iostream>
 #include <cstdio>
+#include <chrono>
 #include "sudoku.h"
 
 using namespace std;
+using namespace std::chrono;
 
 int main() {
 
@@ -129,7 +131,7 @@ int main() {
     cout << "A solution cannot be found.\n";
   }
   cout << '\n';
-
+  
 
   load_board("mystery2.dat", board);
   if (solve_board(board)) {
@@ -154,11 +156,10 @@ int main() {
   
   cout << "=================== Question 5 ===================\n\n";
 
-  /*  load_board("easy.dat", board);
+  load_board("easy.dat", board);
   if (solve_board(board)) {
     cout << "The 'easy' board has a solution:\n";
     display_board(board);
-    cout << "Recursive count = " << count << endl;
    } else {
     cout << "A solution cannot be found.\n";
   }
@@ -173,16 +174,22 @@ int main() {
   }
   cout << '\n';
 
-  
+  auto start1 = high_resolution_clock::now();
+  int counter1 = 0;
   load_board("mystery1.dat", board);
-  if (solve_board(board)) {
+  if (solve_board(board, counter1)) {
     cout << "The 'mystery1' board has a solution:\n";
     display_board(board);
   } else {
     cout << "A solution cannot be found.\n";
   }
   cout << '\n';
+  auto stop1 = high_resolution_clock::now();
 
+  cout << "Number of recursions used to solve mystery board 1: " << counter1 << endl;
+
+  auto duration1 = duration_cast<microseconds>(stop1 - start1);
+  cout << "Time taken to compute mystery board 1 in microseconds: " << duration1.count() << endl << endl;
 
   load_board("mystery2.dat", board);
   if (solve_board(board)) {
@@ -193,17 +200,22 @@ int main() {
   }
   cout << '\n';
 
-  
+  auto start3 = high_resolution_clock::now();
+  int counter3 = 0;  
   load_board("mystery3.dat", board);
-  if (solve_board(board)) {
+  if (solve_board(board, counter3)) {
     cout << "The 'mystery3' board has a solution:\n";
     display_board(board);
   } else {
     cout << "A solution cannot be found.\n";
   }
   cout << '\n';
+  auto stop3 = high_resolution_clock::now();
 
-  */
+  cout << "Number of recursions used to solve mystery board 3: " << counter3 << endl;
+
+  auto duration3 = duration_cast<microseconds>(stop3 - start3);
+  cout << "Time taken to compute mystery board 3 in microseconds: " << duration3.count() << endl << endl;
 
 
   return 0;
