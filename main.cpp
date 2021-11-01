@@ -158,25 +158,6 @@ int main() {
   
   cout << "=================== Question 5 ===================\n\n";
 
-  load_board("easy.dat", board);
-  if (solve_board(board)) {
-    cout << "The 'easy' board has a solution:\n";
-    display_board(board);
-   } else {
-    cout << "A solution cannot be found.\n";
-  }
-  cout << '\n';
-
-  load_board("medium.dat", board);
-  if (solve_board(board)) {
-    cout << "The 'medium' board has a solution:\n";
-    display_board(board);
-  } else {
-    cout << "A solution cannot be found.\n";
-    display_board(board);
-  }
-  cout << '\n';
-
   auto start1 = high_resolution_clock::now();
   int counter1 = 0;
   load_board("mystery1.dat", board);
@@ -187,10 +168,9 @@ int main() {
     cout << "A solution cannot be found.\n";
   }
   cout << '\n';
+
   auto stop1 = high_resolution_clock::now();
-
   cout << "Number of recursions used to solve mystery board 1: " << counter1 << endl;
-
   auto duration1 = duration_cast<microseconds>(stop1 - start1);
   cout << "Time taken to compute mystery board 1 in microseconds: " << duration1.count() << endl << endl;
 
@@ -213,13 +193,11 @@ int main() {
     cout << "A solution cannot be found.\n";
   }
   cout << '\n';
+
   auto stop3 = high_resolution_clock::now();
-
   cout << "Number of recursions used to solve mystery board 3: " << counter3 << endl;
-
   auto duration3 = duration_cast<microseconds>(stop3 - start3);
   cout << "Time taken to compute mystery board 3 in microseconds: " << duration3.count() << endl << endl;
-
 
   return 0;
 }
